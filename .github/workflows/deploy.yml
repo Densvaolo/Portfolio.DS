@@ -28,10 +28,10 @@ jobs:
       - name: Build project with Vite
         run: npm run build
 
-      - name: Check if dist folder exists (debugging)
+      - name: Verify dist folder (debugging)
         run: |
-          echo "Checking if dist/ folder exists..."
-          ls -la dist/ || echo "dist/ folder NOT FOUND!"
+          echo "Checking if dist folder exists..."
+          ls -la dist/ || echo "dist folder NOT FOUND!"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
