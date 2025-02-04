@@ -25,15 +25,19 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-     - name: Check if dist folder exists
-  run: ls -la ./dist
+      - name: Build project with Vite
+        run: npm run build
 
-- name: Upload artifact
-  uses: actions/upload-artifact@v4
-  with:
-    name: github-pages
-    path: dist/
+      - name: Check if dist folder exists (debugging)
+        run: |
+          echo "Checking if dist/ folder exists..."
+          ls -la dist/ || echo "dist/ folder NOT FOUND!"
 
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: github-pages
+          path: dist/
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v2
