@@ -25,14 +25,15 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build project
-        run: npm run build
+     - name: Check if dist folder exists
+  run: ls -la ./dist
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: github-pages
-          path: ./dist
+- name: Upload artifact
+  uses: actions/upload-artifact@v4
+  with:
+    name: github-pages
+    path: dist/
+
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v2
