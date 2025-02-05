@@ -47,18 +47,14 @@ jobs:
       # 🔍 Extra Debugging: Lista alla filer i dist/
       - name: List files in dist folder (Debugging)
         run: |
-          echo "Listing files in dist/ before uploading artifact..."
+          echo "Listing files in dist/ before deployment..."
           ls -R dist/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      # ✅ Ny korrekt metod för att ladda upp artefakt för GitHub Pages
-      - name: Upload artifact for GitHub Pages
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: dist  # 👈 GitHub Pages behöver detta för att deploya rätt
-
+      # ✅ Direktdeployment av `dist/` utan artefakter!
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v2
+        with:
+          folder: dist  # 👈 Direktdeploy istället för att använda en artifact!
