@@ -24,10 +24,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4  # 🔹 Uppdaterat till v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4  # 🔹 Uppdaterat till v4
         with:
           node-version: 18
           cache: 'npm'
@@ -42,13 +42,13 @@ jobs:
       - name: Verify dist folder
         run: |
           echo "Checking if dist folder exists..."
-          ls -la dist/ || echo "ERROR: dist folder NOT FOUND!"
+          ls -la dist/ || echo "❌ ERROR: dist folder NOT FOUND!"
 
       - name: Setup Pages
-        uses: actions/configure-pages@v3
+        uses: actions/configure-pages@v4  # 🔹 Uppdaterat till v4
 
       - name: Upload artifact (Updated to v4)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4  # 🔹 Fixat felet
         with:
           name: github-pages
           path: ./dist/
@@ -57,4 +57,4 @@ jobs:
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v3
+        uses: actions/deploy-pages@v2  # 🔹 Behåll v2 eftersom v3 inte finns
