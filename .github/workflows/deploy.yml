@@ -51,7 +51,7 @@ jobs:
         uses: actions/upload-artifact@v4  # Uppdaterad till senaste version
         with:
           name: github-pages
-          path: dist/**  # Fixat sökvägen för att inkludera alla filer i dist/
+          path: dist/**  # 🔹 Fixat sökvägen för att inkludera alla filer i dist/
           retention-days: 1
           if-no-files-found: error
 
