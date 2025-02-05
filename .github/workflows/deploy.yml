@@ -24,10 +24,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4  # Uppdaterad till senaste version
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4  # Uppdaterad till senaste version
+        uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: 'npm'
@@ -38,23 +38,28 @@ jobs:
       - name: Build project with Vite
         run: npm run build
 
-      # 🔍 Debugging: Kolla om dist/ skapades korrekt
       - name: Verify dist folder
         run: |
           echo "Checking if dist folder exists..."
           ls -la dist/ || echo "ERROR: dist folder NOT FOUND!"
 
+      # 🔍 NY DEBUGGING: Se exakt vad som finns i dist/
+      - name: List files in dist folder (Debugging)
+        run: |
+          echo "Listing files in dist/ before uploading artifact..."
+          ls -R dist/
+
       - name: Setup Pages
-        uses: actions/configure-pages@v4  # Uppdaterad till senaste version
+        uses: actions/configure-pages@v4
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4  # Uppdaterad till senaste version
+        uses: actions/upload-artifact@v4
         with:
           name: github-pages
-          path: dist/**  # 🔹 Fixat sökvägen för att inkludera alla filer i dist/
+          path: dist/**
           retention-days: 1
           if-no-files-found: error
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2  # Behåll v2 eftersom v3 inte finns
+        uses: actions/deploy-pages@v2
