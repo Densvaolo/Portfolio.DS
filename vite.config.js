@@ -1,8 +1,8 @@
-import { defineConfig } from 'vite';
-
+// vite.config.js
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+// https://vitejs.dev/config/
 export default defineConfig({
-    base: './', // För att undvika sökvägsproblem
-    build: {
-        outDir: 'dist', // Se till att utdata hamnar i dist/
-    },
-});
+    plugins: [react()],
+    base: '/my-vite-app/'
+})
