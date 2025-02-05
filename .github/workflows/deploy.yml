@@ -38,7 +38,7 @@ jobs:
       - name: Build project with Vite
         run: npm run build
 
-      # Debugging: Kolla om dist/ skapades korrekt
+      # 🔍 Debugging: Kolla om dist/ skapades korrekt
       - name: Verify dist folder
         run: |
           echo "Checking if dist folder exists..."
@@ -51,7 +51,7 @@ jobs:
         uses: actions/upload-artifact@v4  # Uppdaterad till senaste version
         with:
           name: github-pages
-          path: ./dist/
+          path: dist/**  # Fixat sökvägen för att inkludera alla filer i dist/
           retention-days: 1
           if-no-files-found: error
 
