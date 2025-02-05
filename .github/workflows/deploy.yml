@@ -53,16 +53,12 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+      # ✅ Ny korrekt metod för att ladda upp artefakt för GitHub Pages
+      - name: Upload artifact for GitHub Pages
+        uses: actions/upload-pages-artifact@v2
         with:
-          name: github-pages
-          path: dist  # ✅ Fixad sökväg – laddar upp hela dist/
-          retention-days: 1
-          if-no-files-found: error
+          path: dist  # 👈 GitHub Pages behöver detta för att deploya rätt
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
-        with:
-          artifact_name: github-pages  # ✅ Se till att rätt artefakt används!
