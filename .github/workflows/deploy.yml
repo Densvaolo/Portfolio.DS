@@ -3,8 +3,8 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ['main']  # Kör bara när main uppdateras
-  workflow_dispatch:  # Gör att du kan köra den manuellt från Actions
+    branches: ['main']
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -51,9 +51,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: github-pages
-          path: dist/
-          retention-days: 1  # Artifakten lagras i 1 dag för debugging
-          if-no-files-found: error  # Stoppa bygget om dist/ saknas
+          path: ./dist/
+          retention-days: 1
+          if-no-files-found: error  # Stoppa om dist/ saknas
 
       - name: Deploy to GitHub Pages
         id: deployment
