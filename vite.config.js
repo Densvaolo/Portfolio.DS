@@ -1,8 +1,8 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite'
 
-// https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [react()],
-    base: '/Portfolio.DS/', // Lägg till din GitHub Pages-sökväg här
-});
+    base: '/Portfolio.DS/',  // Det här är basvägen för GitHub Pages (ersätt med din repository-namn om det är annorlunda)
+    build: {
+        outDir: 'dist',
+    },
+})
