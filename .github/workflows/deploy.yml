@@ -20,31 +20,24 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4  # Uppdaterad version för checkout
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4  # Uppdaterad version för Node.js setup
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: 'npm'
-
       - name: Install dependencies
         run: npm install
-
-      - name: Build project
+      - name: Build
         run: npm run build
-
       - name: Setup Pages
-        uses: actions/configure-pages@v4  # Uppdaterad version för Pages setup
-
+        uses: actions/configure-pages@v4
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3  # Här är versionen som måste vara v2
+        uses: actions/upload-artifact@v2
         with:
-          path: './dist'  # Din build-mapp (dist)
-      
+          path: './dist'
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v3  # Uppdaterad version för deploy
+        uses: actions/deploy-pages@v2
