@@ -44,9 +44,9 @@ jobs:
           fi
 
       - name: 📤 Upload GitHub Pages artifact
-        uses: actions/upload-pages-artifact@v2  # 🛠 Uppdaterad och korrekt!
+        uses: actions/upload-pages-artifact@v2
         with:
-          path: dist  # 🔥 Viktigt! Ladda upp `dist/` till Pages
+          path: dist
 
       - name: ⚙️ Configure GitHub Pages
         uses: actions/configure-pages@v4
