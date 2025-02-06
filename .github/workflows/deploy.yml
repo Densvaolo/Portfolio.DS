@@ -1,12 +1,25 @@
+# Simple workflow for deploying static content to GitHub Pages
 name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: ['main']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
 
 jobs:
-  build:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
 
     steps:
@@ -17,15 +30,37 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
+          cache: 'npm'
 
-      - name: Install dependencies
-        run: npm install
+      # Rensa gamla beroenden för att undvika fel
+      - name: Clean install dependencies
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
 
-      - name: Build project
+      - name: Build project with Vite
         run: npm run build
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      # 🔍 Debugging: Kolla om dist/ skapades korrekt
+      - name: Verify dist folder
+        run: |
+          echo "Checking if dist folder exists..."
+          ls -la dist/ || echo "ERROR: dist folder NOT FOUND!"
+
+      # 🔍 Extra Debugging: Lista alla filer i dist/
+      - name: List files in dist folder (Debugging)
+        run: |
+          echo "Listing files in dist/ before deployment..."
+          ls -R dist/
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      # ✅ Deployment till GitHub Pages
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          path: dist  # 👈 Nu laddas artifacten upp korrekt!
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v2

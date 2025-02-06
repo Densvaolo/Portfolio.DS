@@ -1,5 +1,5 @@
 {
-  "name": "portfolio2025",
+  "name": "Portfolio.DS",
   "private": true,
   "version": "0.0.1",
   "type": "module",
@@ -11,6 +11,7 @@
   "dependencies": {},
   "devDependencies": {
     "vite": "^6.0.5",
+    "rollup": "^4.32.1",
     "eslint": "^9.19.0",
     "eslint-config-airbnb-standard": "^3.1.0"
   }
