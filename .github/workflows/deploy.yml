@@ -1,10 +1,8 @@
-# GitHub Actions workflow för att deploya en Vite-sida till GitHub Pages
 name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: ['main']
   workflow_dispatch:
 
 permissions:
@@ -13,7 +11,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: true
 
 jobs:
@@ -24,37 +22,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🚀 Checkout repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: 🔧 Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: "npm"
+          cache: 'npm'
 
-      - name: 📦 Install dependencies
+      - name: Install dependencies
         run: npm install
 
-      - name: 🔨 Build project with Vite
+      - name: Build project with Vite
         run: npm run build
 
-      - name: 📂 Verify dist folder
+      - name: Verify dist folder
         run: |
-          echo "Checking if dist folder exists..."
           ls -la dist || echo "ERROR: dist folder NOT FOUND!"
 
-      - name: 📤 Upload build artifact
-        uses: actions/upload-artifact@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
         with:
-          name: github-pages
           path: dist
-          retention-days: 1
 
-      - name: 🛠 Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: 🚀 Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v2
-        with:
-          artifact_name: github-pages  # 👈 Använd rätt artifact-namn!
