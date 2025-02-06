@@ -39,16 +39,17 @@ jobs:
       - name: Verify dist folder
         run: |
           if [ -d "dist" ]; then
-            echo "dist folder exists"
+            echo "✅ dist folder found!"
             ls -la dist
           else
-            echo "ERROR: dist folder NOT FOUND!"
+            echo "❌ ERROR: dist folder NOT FOUND!"
             exit 1
           fi
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-artifact@v4  # 🔥 Uppdaterad till v4!
         with:
+          name: github-pages
           path: dist
 
       - name: Deploy to GitHub Pages
