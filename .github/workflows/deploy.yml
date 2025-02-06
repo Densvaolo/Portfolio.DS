@@ -1,19 +1,9 @@
-# Simple workflow for deploying static content to GitHub Pages
 name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ['main']
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: 'pages'
-  cancel-in-progress: true
+    branches:
+      - main
 
 jobs:
   build:
@@ -27,32 +17,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: 'npm'
 
       - name: Install dependencies
         run: npm install
 
-      - name: Build project with Vite
+      - name: Build project
         run: npm run build
 
-      # 🔍 Debugging: Kolla om dist/ skapades korrekt
-      - name: Verify dist folder
-        run: |
-          echo "Checking if dist folder exists..."
-          ls -la dist/ || echo "ERROR: dist folder NOT FOUND!"
-
-      # 🗃️ Ladda upp dist/ som en artifact för deploy
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: dist  # 👈 Detta ser till att dist/ används korrekt vid deploy
-
-  deploy:
-    needs: build
-    environment:
-      name: github-pages
-    runs-on: ubuntu-latest
-
-    steps:
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v2
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
