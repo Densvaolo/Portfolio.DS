@@ -16,12 +16,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -38,23 +34,18 @@ jobs:
       - name: Build project with Vite
         run: npm run build
 
-      # 🔍 Debugging: Kolla om dist/ skapades korrekt
-      - name: Verify dist folder
-        run: |
-          echo "Checking if dist folder exists..."
-          ls -la dist/ || echo "ERROR: dist folder NOT FOUND!"
+      # ✅ Ladda upp artefakten för deployment
+      - name: Upload artifact for deployment
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: dist  # Ladda upp den byggda dist/ mappen
 
-      # 🔍 Extra Debugging: Lista alla filer i dist/
-      - name: List files in dist folder (Debugging)
-        run: |
-          echo "Listing files in dist/ before deployment..."
-          ls -R dist/
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      # ✅ Direktdeployment av `dist/` utan artefakter!
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v2
-        with:
-          folder: dist  # 👈 Direktdeploy istället för att använda en artifact!
