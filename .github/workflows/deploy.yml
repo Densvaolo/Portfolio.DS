@@ -1,4 +1,4 @@
-# GitHub Actions workflow för att deploya en Vite-baserad sida till GitHub Pages
+# GitHub Actions workflow för att deploya en Vite-sida till GitHub Pages
 name: Deploy to GitHub Pages
 
 on:
@@ -39,7 +39,12 @@ jobs:
       - name: 🔨 Build project with Vite
         run: npm run build
 
-      - name: 📂 Upload build artifacts
+      - name: 📂 Verify dist folder
+        run: |
+          echo "Checking if dist folder exists..."
+          ls -la dist || echo "ERROR: dist folder NOT FOUND!"
+
+      - name: 📤 Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: github-pages
@@ -51,3 +56,5 @@ jobs:
 
       - name: 🚀 Deploy to GitHub Pages
         uses: actions/deploy-pages@v2
+        with:
+          artifact_name: github-pages  # 👈 Använd rätt artifact-namn!
