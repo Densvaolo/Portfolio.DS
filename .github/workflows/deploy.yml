@@ -10,33 +10,30 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: 'pages'
-  cancel-in-progress: true
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      
+      url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
-      - name: Checkout repository
+      - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: 🛠 Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: 'npm'
+          cache: npm
 
-      - name: Install dependencies
+      - name: 📦 Install dependencies
         run: npm install
 
-      - name: Build project with Vite
+      - name: 🔨 Build project with Vite
         run: npm run build
 
-      - name: Verify dist folder
+      - name: 📂 Verify `dist` folder exists
         run: |
           if [ -d "dist" ]; then
             echo "✅ dist folder found!"
@@ -46,16 +43,13 @@ jobs:
             exit 1
           fi
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+      - name: 📤 Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v2  # 🔥 Viktigt att använda rätt action!
         with:
-          name: github-pages  # 👈 Viktigt att detta matchar deployen!
           path: dist
 
-      - name: Setup Pages
+      - name: ⚙️ Setup Pages
         uses: actions/configure-pages@v4
 
-      - name: Deploy to GitHub Pages
+      - name: 🚀 Deploy to GitHub Pages
         uses: actions/deploy-pages@v2
-        with:
-          artifact_name: github-pages  # 🔥 Se till att vi använder rätt artefakt!
