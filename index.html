@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dennis Svarts</title>
+  <link rel="stylesheet" href="src/style.css"> <!-- Uppdatera vägen till din CSS -->
+</head>
+
+<body>
+
+  <!--Navigation-->
+  <nav class="Navbar Sticky">
+    <div class="left">
+      <div class="Myname">Dennis Svarts</div>
+      <div class="Social-media">
+        <a href="https://github.com/Densvaolo">
+          <img src="dist/assets/github-a60e3954.svg" alt="Github"> <!-- Uppdatera vägen till bilder -->
+        </a>
+        <a href="https://www.linkedin.com/in/dennis-svarts-221528326/">
+          <img src="dist/assets/linkedin-b83b5852.svg" alt="Linkedin">
+        </a>
+        <a href="https://www.facebook.com/svarts1">
+          <img src="dist/assets/facebook-d6f9b158.svg" alt="Facebook">
+        </a>
+        <a href="https://www.instagram.com/3dsvrts/">
+          <img src="dist/assets/instagram-5c4cdd51.svg" alt="Instagram">
+        </a>
+      </div>
+    </div>
+    <div class="menu">
+      <a href="#home" class="button-74">Home</a>
+      <a href="#about" class="button-74">About</a>
+      <a href="#skills" class="button-74">Skills</a>
+      <a href="#projects" class="button-74">Projects</a>
+      <a href="#contact" class="button-74">Contact</a>
+    </div>
+  </nav>
+
+  <!--Main content-->
+  <main>
+    <!--Hero section-->
+    <section id="home" class="hero">
+      <header>
+        <h1 class="netdeveloper">.NET Developer – Creating Meaningful Solutions</h1>
+        <div class="img-container">
+          <img src="dist/assets/Hero-a9898632.jpg" alt="Dennis" id="about" class="Picture "> <!-- Uppdatera vägen -->
+        </div>
+        <div>
+          <p>
+            Hello, my name is Dennis, and I am a passionate .NET developer.
+            I thrive on crafting meaningful solutions through code, transforming complex challenges into
+            elegant, functional applications.
+            <br>Each line of code is not just a task but a step toward creating something impactful,
+            merging
+            innovation with precision.
+          </p>
+          <a href="https://www.dropbox.com/scl/fi/ng8ki6pdpvq4yfsbwyvyn/dennis-svarts-CV-nytt-cv-2.pdf?rlkey=hoofnvuqs5wr9mfaleifl7xvh&st=iz6s4138&dl=0"
+            target="_blank">
+            <button class="Cvbutton">Download my CV</button>
+          </a>
+          <a href="https://nackademin.se/utbildningar/programutvecklare-net/" target="_blank">
+            <button class="Cvbutton">My education</button>
+          </a>
+        </div>
+      </header>
+    </section>
+
+    <!--Skills Section-->
+    <section id="skills" class="work">
+      <h2>Skills and Expertise</h2>
+      <div class="chip-wrapper">
+        <div class="chip">C#</div>
+        <div class="chip">ASP.NET</div>
+        <div class="chip">ASP.NET Core</div>
+        <div class="chip">Azure DevOps</div>
+        <div class="chip">Entity Framework</div>
+        <div class="chip">Microsoft SQL Server</div>
+        <div class="chip">CSS</div>
+        <div class="chip">HTML 5</div>
+        <div class="chip">JavaScript</div>
+        <div class="chip">React.js</div>
+      </div>
+    </section>
+
+    <!--Projects Section-->
+    <section id="projects" class="Projects">
+      <h2>My Projects</h2>
+      <article>
+        <div class="img-container">
+          <img src="dist/assets/spotify-31305c3e.jpg" alt="Projects">
+        </div>
+        <div>
+          <h3>Spotify Clone</h3>
+          <p>
+            Spotify clone, coming soon..
+          </p>
+          <button>View the app</button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div id="weather">
+      <h3>Weather in <span id="city-name"></span></h3>
+      <img id="weather-icon" src="" alt="Weather icon" />
+      <div id="weather-info">
+        <p id="temperature"></p>
+        <p id="weather-description"></p>
+      </div>
+      <div>
+        &copy; 2024 Dennis Svarts
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="src/main.js"></script>
+
+</body>
+
+</html>
