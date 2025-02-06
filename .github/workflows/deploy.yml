@@ -18,6 +18,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -34,18 +35,24 @@ jobs:
       - name: Build project with Vite
         run: npm run build
 
-      # ✅ Ladda upp artefakten för deployment
-      - name: Upload artifact for deployment
+      # 🔍 Debugging: Kolla om dist/ skapades korrekt
+      - name: Verify dist folder
+        run: |
+          echo "Checking if dist folder exists..."
+          ls -la dist/ || echo "ERROR: dist folder NOT FOUND!"
+
+      # 🗃️ Ladda upp dist/ som en artifact för deploy
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: dist  # Ladda upp den byggda dist/ mappen
+          path: dist  # 👈 Detta ser till att dist/ används korrekt vid deploy
 
   deploy:
     needs: build
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+
     steps:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v2
