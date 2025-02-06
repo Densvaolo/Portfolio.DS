@@ -47,10 +47,15 @@ jobs:
           fi
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4  # 🔥 Uppdaterad till v4!
+        uses: actions/upload-artifact@v4
         with:
-          name: github-pages
+          name: github-pages  # 👈 Viktigt att detta matchar deployen!
           path: dist
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v2
+        with:
+          artifact_name: github-pages  # 🔥 Se till att vi använder rätt artefakt!
