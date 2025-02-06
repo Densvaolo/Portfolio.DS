@@ -23,10 +23,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4  # Uppdaterad version
+        uses: actions/checkout@v4  # Uppdaterad version för checkout
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4  # Uppdaterad version
+        uses: actions/setup-node@v4  # Uppdaterad version för Node.js setup
         with:
           node-version: 18
           cache: 'npm'
@@ -38,13 +38,13 @@ jobs:
         run: npm run build
 
       - name: Setup Pages
-        uses: actions/configure-pages@v4  # Uppdaterad version
+        uses: actions/configure-pages@v4  # Uppdaterad version för Pages setup
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2  # Uppdaterad till v2
+        uses: actions/upload-pages-artifact@v2  # Här är versionen som måste vara v2
         with:
-          path: './dist'  # Korrekt sökväg för din build-output
-
+          path: './dist'  # Din build-mapp (dist)
+      
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2  # Uppdaterad version
+        uses: actions/deploy-pages@v2  # Uppdaterad version för deploy
