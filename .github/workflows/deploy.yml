@@ -35,7 +35,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4  # Uppdaterad version
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2  # Uppdaterad version
+        uses: actions/upload-pages-artifact@v2  # Använd v2 istället för v3
         with:
           path: './dist'  # Korrekt sökväg för din build-output
       - name: Deploy to GitHub Pages
