@@ -1,9 +1,10 @@
-# Simple workflow for deploying static content to GitHub Pages
+# GitHub Actions workflow för att deploya en Vite-baserad sida till GitHub Pages
 name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ['main']
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -12,51 +13,41 @@ permissions:
   id-token: write
 
 concurrency:
-  group: 'pages'
+  group: "pages"
   cancel-in-progress: true
 
 jobs:
   deploy:
     environment:
       name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: 🚀 Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: 🔧 Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: 'npm'
+          cache: "npm"
 
-      - name: Install dependencies
+      - name: 📦 Install dependencies
         run: npm install
 
-      - name: Build project with Vite
+      - name: 🔨 Build project with Vite
         run: npm run build
 
-      # 🔍 Debugging: Kolla om dist/ skapades korrekt
-      - name: Verify dist folder
-        run: |
-          echo "Checking if dist folder exists..."
-          ls -la dist/ || echo "ERROR: dist folder NOT FOUND!"
+      - name: 📂 Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: github-pages
+          path: dist
+          retention-days: 1
 
-      # 🔍 Extra Debugging: Lista alla filer i dist/
-      - name: List files in dist folder (Debugging)
-        run: |
-          echo "Listing files in dist/ before deployment..."
-          ls -R dist/
-
-      - name: Setup Pages
+      - name: 🛠 Setup Pages
         uses: actions/configure-pages@v4
 
-      # ✅ Ladda upp artifact för GitHub Pages
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: dist
-
-      - name: Deploy to GitHub Pages
+      - name: 🚀 Deploy to GitHub Pages
         uses: actions/deploy-pages@v2
