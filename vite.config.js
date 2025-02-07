@@ -1,8 +1,11 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vite';
 
 export default defineConfig({
-    base: '/Portfolio.DS/',  // Använd ditt GitHub-repository namn här
+    base: '/Portfolio.DS/', // Basväg för GitHub Pages
     build: {
-        outDir: 'dist', // Mappen där byggresultatet kommer att ligga
+        outDir: 'dist',
+        rollupOptions: {
+            input: './index.html', // Ange rätt ingångsfil
+        },
     },
-})
+});
